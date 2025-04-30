@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <title>Finalizar Encomenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        // Extrai o valor da query string (?produto=...) e coloca no campo hidden
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const produto = params.get("produto");
+            if (produto) {
+                document.getElementById("produto-nome").innerText = produto;
+                document.getElementById("produto-input").value = produto;
+            }
+        };
+    </script>
+</head>
+<body>
+<div class="container py-5">
+    <h2 class="text-center mb-4">Finalizar Encomenda</h2>
+    <p class="text-center">Produto: <strong id="produto-nome">...</strong></p>
+    <p class="text-center">Por favor preencha os dados abaixo após o pagamento.</p>
+
+    <form action="https://formspree.io/f/xqaqeyow" method="POST" class="mx-auto" style="max-width: 700px;">
+        <input type="hidden" name="produto" id="produto-input" value="">
+
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label">Nome Próprio</label>
+                <input type="text" name="nome_proprio" class="form-control">
+            </div>
+            <div class="col">
+                <label class="form-label">Apelido</label>
+                <input type="text" name="apelido" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Endereço</label>
+            <input type="text" name="endereco" class="form-control" placeholder="Rua, número, etc." required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Apartamento, andar, etc. (opcional)</label>
+            <input type="text" name="apartamento" class="form-control">
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label">Código Postal</label>
+                <input type="text" name="postal" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Cidade</label>
+                <input type="text" name="cidade" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Região</label>
+                <select name="regiao" class="form-select">
+                    <option>Continente</option>
+                    <option>Açores</option>
+                    <option>Madeira</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Telemóvel</label>
+            <input type="tel" name="telemovel" class="form-control" pattern="[0-9]{9}" placeholder="Ex: 912345678" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Observações (opcional)</label>
+            <textarea name="mensagem" class="form-control" rows="2"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-dark w-100">Enviar Encomenda</button>
+    </form>
+
+</div>
+</body>
+</html>
